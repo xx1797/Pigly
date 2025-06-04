@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory()
+            ->create()
+            ->each(function ($user) {
+                \App\Models\WeightTarget::factory()->create(['user_id' => $user->id]);
+                \App\Models\WeightLog::factory()->count(35)->create(['user_id' => $user->id]);
+            });
     }
 }
