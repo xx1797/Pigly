@@ -4,7 +4,7 @@
 
 以下のコマンドを順に実行することで、ローカル開発環境が立ち上がります。
 
-```bash
+
 # 1. Dockerコンテナをビルドして起動
 docker compose up -d --build
 
