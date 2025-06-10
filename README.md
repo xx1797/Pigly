@@ -39,7 +39,8 @@ phpMyAdmin（DB確認用）
 開発環境：WSL2（Ubuntu） + VSCode
 
 ## ER図
-![image](https://github.com/user-attachments/assets/7d0a4b7d-5fc6-4ffc-81c9-06ae2fbdd4d4)
+![スクリーンショット 2025-06-10 170718](https://github.com/user-attachments/assets/1661b3b5-5215-406c-8a77-15cbd9745af5)
+
 
 
 ## URL（ローカル開発）
