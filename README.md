@@ -47,6 +47,7 @@ phpMyAdmin（DB確認用）
 アプリ: http://localhost:8000
 
 phpMyAdmin: http://localhost:8080
+
 ログイン情報：laravel_user / laravel_pass
 
 ## テストユーザー情報（初期データ）
