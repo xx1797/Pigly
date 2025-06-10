@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -23,13 +22,20 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function weightLogs()
-    {
-        return $this->hasMany(WeightLog::class);
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
+    // 🔽 追加：ユーザーが持つ目標体重のリレーション
     public function weightTarget()
     {
         return $this->hasOne(WeightTarget::class);
+    }
+
+    // 🔽 追加：ユーザーが持つ体重ログのリレーション（もし未定義なら）
+    public function weightLogs()
+    {
+        return $this->hasMany(WeightLog::class);
     }
 }

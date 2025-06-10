@@ -1,45 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pigly</title>
+  <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #fbd3e9, #bbd2c5);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .form-card {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .form-title {
+      text-align: center;
+      color: #DA7BC2;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+    .btn-pink {
+      background-color: #DA7BC2;
+      color: white;
+      border: none;
+    }
+    .text-danger {
+      color: red;
+      font-size: 0.9rem;
+    }
+  </style>
+<body>
 @extends('layouts.app')
 
 @section('content')
-<h2>体重記録 編集</h2>
+<div class="container" style="max-width: 600px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="color: #DA7BC2; font-weight: bold; text-align: center;">Weight Log 編集</h2>
 
-<form method="POST" action="/weight_logs/{{ $log->id }}">
-    @csrf
-    @method('PUT')
+    <form method="POST" action="{{ route('weight_logs.update', $log->id) }}">
+        @csrf
+        @method('PUT')
 
-    <label>日付
-        <input type="date" name="date" value="{{ old('date', $log->date) }}">
-        @error('date')<div class="error">{{ $message }}</div>@enderror
-    </label>
+        <div class="mb-3">
+            <label for="date">日付</label>
+            <input type="date" name="date" value="{{ old('date', $log->date) }}">
+            @error('date')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-    <label>体重
-        <input type="text" name="weight" value="{{ old('weight', $log->weight) }}">
-        @error('weight')<div class="error">{{ $message }}</div>@enderror
-    </label>
+        <div class="mb-3">
+            <label for="weight">体重 (kg)</label>
+            <input type="number" step="0.1" name="weight" value="{{ old('weight', $log->weight) }}">
+            @error('weight')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-    <label>摂取カロリー
-        <input type="number" name="calories" value="{{ old('calories', $log->calories) }}">
-        @error('calories')<div class="error">{{ $message }}</div>@enderror
-    </label>
+        <div class="mb-3">
+            <label for="calories">摂取カロリー (kcal)</label>
+            <input type="number" name="calories" value="{{ old('calories', $log->calories) }}">
+            @error('calories')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-    <label>運動時間
-        <input type="time" name="exercise_time" value="{{ old('exercise_time', $log->exercise_time) }}">
-        @error('exercise_time')<div class="error">{{ $message }}</div>@enderror
-    </label>
+        <div class="mb-3">
+            <label for="exercise_time">運動時間</label>
+            <input type="time" name="exercise_time" value="{{ old('exercise_time', $log->exercise_time) }}">
+            @error('exercise_time')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-    <label>運動内容
-        <textarea name="exercise_content">{{ old('exercise_content', $log->exercise_content) }}</textarea>
-        @error('exercise_content')<div class="error">{{ $message }}</div>@enderror
-    </label>
+        <div class="mb-3">
+            <label for="exercise_content">運動内容</label>
+            <textarea name="exercise_content" rows="3">{{ old('exercise_content', $log->exercise_content) }}</textarea>
+            @error('exercise_content')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-    <button type="submit">更新</button>
-</form>
-
-<form method="POST" action="/weight_logs/{{ $log->id }}">
-    @csrf
-    @method('DELETE')
-    <button type="submit" style="background: crimson; color: white;">削除</button>
-</form>
-
-<a href="/weight_logs" role="button">戻る</a>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <div>
+                <a href="{{ route('weight_logs.index') }}" class="btn btn-secondary">戻る</a>
+            </div>
+            <div class="d-flex gap-2">
+                <form action="{{ route('weight_logs.destroy', $log->id) }}" method="POST" onsubmit="return confirm('削除してもよろしいですか？')">
+                    @csrf @method('DELETE')
+                    <button type="submit" style="background-color: transparent; border: none;" title="削除">
+                        🗑️
+                    </button>
+                </form>
+                <button type="submit" class="btn btn-primary" style="background-color: #DA7BC2; border: none;">更新</button>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection
+
+</body>
+</html>

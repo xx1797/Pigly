@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\WeightLog;
 use App\Http\Requests\StoreWeightLogRequest;
+use App\Http\Requests\GoalSettingRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WeightLogController extends Controller
 {
     public function index()
     {
-        $logs = WeightLog::where('user_id', Auth::id())
-                         ->orderByDesc('date')
-                         ->paginate(8);
-
+        $logs = WeightLog::where('user_id', Auth::id())->orderByDesc('date')->paginate(8);
         return view('weight_logs.index', compact('logs'));
     }
 
@@ -24,17 +23,8 @@ class WeightLogController extends Controller
 
     public function store(StoreWeightLogRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = Auth::id();
-        WeightLog::create($data);
-
-        return redirect('/weight_logs')->with('success', '登録が完了しました');
-    }
-
-    public function show($id)
-    {
-        $log = WeightLog::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        return view('weight_logs.show', compact('log'));
+        WeightLog::create($request->validated() + ['user_id' => Auth::id()]);
+        return redirect()->route('weight_logs.index')->with('success', '登録しました');
     }
 
     public function edit($id)
@@ -47,24 +37,40 @@ class WeightLogController extends Controller
     {
         $log = WeightLog::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $log->update($request->validated());
-
-        return redirect('/weight_logs')->with('success', '更新しました');
+        return redirect()->route('weight_logs.index')->with('success', '更新しました');
     }
 
     public function destroy($id)
     {
         $log = WeightLog::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $log->delete();
-
-        return redirect('/weight_logs')->with('success', '削除しました');
+        return redirect()->route('weight_logs.index')->with('success', '削除しました');
     }
 
     public function search(Request $request)
     {
         $logs = WeightLog::where('user_id', Auth::id())
-                         ->whereBetween('date', [$request->start_date, $request->end_date])
-                         ->paginate(8);
-
+            ->when($request->start_date, fn($q) => $q->where('date', '>=', $request->start_date))
+            ->when($request->end_date, fn($q) => $q->where('date', '<=', $request->end_date))
+            ->orderByDesc('date')
+            ->paginate(8);
         return view('weight_logs.index', compact('logs'));
+    }
+
+    public function editGoal()
+    {
+        $target = WeightTarget::where('user_id', auth()->id())->first();
+
+        return view('weight_logs.goal_setting', compact('target'));
+    }
+
+    public function updateGoal(GoalSettingRequest $request)
+    {
+        WeightTarget::updateOrCreate(
+            ['user_id' => auth()->id()],
+            ['target_weight' => $request->target_weight]
+        );
+
+        return redirect()->route('weight_logs.index')->with('success', '目標体重を更新しました。');
     }
 }

@@ -12,18 +12,14 @@ return [
 
     'email' => 'email',
 
-    'views' => true, // Blade を使うときは true
-
-    'home' => '/weight_logs', // ログイン後のリダイレクト先
-
-    'middleware' => ['web'],
-
-    'authenticatable' => Laravel\Fortify\Http\Middleware\EnsureLoginIsNotThrottled::class,
+    'home' => '/dashboard',
 
     'limiters' => [
-        'login' => 'login',
-        'two-factor' => 'two-factor',
+        'login' => null,
+        'two-factor' => null,
     ],
+
+    'views' => true,
 
     'features' => [
         Features::registration(),
@@ -35,4 +31,5 @@ return [
             'confirmPassword' => true,
         ]),
     ],
+
 ];

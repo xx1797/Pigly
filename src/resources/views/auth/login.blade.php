@@ -1,21 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>ログイン</h2>
-<form method="POST" action="{{ route('login') }}">
+<div class="form-card">
+  <h1 class="form-title">PiGLy<br>ログイン</h1>
+  <form method="POST" action="{{ route('login') }}">
     @csrf
-
     <label>メールアドレス
-        <input type="email" name="email" required>
-        @error('email')<div class="error">{{ $message }}</div>@enderror
+      <input type="email" name="email" value="{{ old('email') }}">
+      @error('email')<div class="text-danger">{{ $message }}</div>@enderror
     </label>
 
     <label>パスワード
-        <input type="password" name="password" required>
-        @error('password')<div class="error">{{ $message }}</div>@enderror
+      <input type="password" name="password">
+      @error('password')<div class="text-danger">{{ $message }}</div>@enderror
     </label>
 
-    <button type="submit">ログイン</button>
-    <p><a href="/register">アカウント作成はこちら</a></p>
-</form>
+    <button class="btn-pink">ログイン</button>
+    <p style="text-align:center; margin-top:1rem;">
+      <a href="{{ route('register.step1') }}">アカウント作成はこちら</a>
+    </p>
+  </form>
+</div>
 @endsection

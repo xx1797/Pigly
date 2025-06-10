@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
     public function run()
     {
-        \App\Models\User::factory()
-            ->create()
-            ->each(function ($user) {
-                \App\Models\WeightTarget::factory()->create(['user_id' => $user->id]);
-                \App\Models\WeightLog::factory()->count(35)->create(['user_id' => $user->id]);
-            });
+        User::create([
+            'name' => 'Ryuto',
+            'email' => 'ryuuto0127@softbank.ne.jp',
+            'password' => Hash::make('pas'), 
+        ]);
     }
 }

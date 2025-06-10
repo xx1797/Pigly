@@ -1,0 +1,65 @@
+<?php
+
+return [
+
+    'accepted' => ':attribute を承認してください。',
+    'active_url' => ':attribute は有効なURLではありません。',
+    'after' => ':attribute には :date より後の日付を指定してください。',
+    'alpha' => ':attribute にはアルファベッドのみ使用できます。',
+    'alpha_dash' => ':attribute には英数字とダッシュ(-)が使用できます。',
+    'alpha_num' => ':attribute には英数字が使用できます。',
+    'array' => ':attribute には配列を指定してください。',
+    'before' => ':attribute には :date より前の日付を指定してください。',
+    'between' => [
+        'numeric' => ':attribute には :min から :max までの数字を指定してください。',
+        'file' => ':attribute には :min KBから :max KBまでのファイルを指定してください。',
+        'string' => ':attribute には :min 文字から :max 文字までの文字列を指定してください。',
+        'array' => ':attribute の項目は :min 個から :max 個まで指定してください。',
+    ],
+    'boolean' => ':attribute には true か false を指定してください。',
+    'confirmed' => ':attribute が確認用と一致しません。',
+    'date' => ':attribute は有効な日付ではありません。',
+    'date_format' => ':attribute の形式は :format と一致していません。',
+    'different' => ':attribute と :other には異なる値を指定してください。',
+    'digits' => ':attribute は :digits 桁でなければなりません。',
+    'digits_between' => ':attribute は :min 桁から :max 桁でなければなりません。',
+    'email' => ':attribute は「ユーザー名@ドメイン」形式で入力してください。',
+    'exists' => '選択された :attribute は有効ではありません。',
+    'file' => ':attribute はファイルでなければなりません。',
+    'filled' => ':attribute は必須です。',
+    'image' => ':attribute は画像でなければなりません。',
+    'in' => '選択された :attribute は有効ではありません。',
+    'integer' => ':attribute は整数でなければなりません。',
+    'max' => [
+        'numeric' => ':attribute は :max 以下でなければなりません。',
+        'file' => ':attribute は :max KB以下のファイルでなければなりません。',
+        'string' => ':attribute は :max 文字以下でなければなりません。',
+        'array' => ':attribute の項目は :max 個以下でなければなりません。',
+    ],
+    'min' => [
+        'numeric' => ':attribute は :min 以上でなければなりません。',
+        'string' => ':attribute は :min 文字以上でなければなりません。',
+    ],
+    'not_in' => '選択された :attribute は有効ではありません。',
+    'numeric' => ':attribute には数字を指定してください。',
+    'regex' => ':attribute の形式が正しくありません。',
+    'required' => ':attribute を入力してください。',
+    'same' => ':attribute と :other が一致していません。',
+    'size' => [
+        'numeric' => ':attribute は :size を指定してください。',
+        'file' => ':attribute は :size KBのファイルでなければなりません。',
+        'string' => ':attribute は :size 文字でなければなりません。',
+        'array' => ':attribute の項目は :size 個でなければなりません。',
+    ],
+    'string' => ':attribute は文字列でなければなりません。',
+    'unique' => ':attribute はすでに存在しています。',
+    'url' => ':attribute は有効なURL形式で入力してください。',
+    'confirmed' => ':attribute が確認と一致しません。',
+
+    // 属性名変換
+    'attributes' => [
+        'name' => 'お名前',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+    ],
+];
