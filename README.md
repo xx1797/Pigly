@@ -5,20 +5,20 @@
 以下のコマンドを順に実行することで、ローカル開発環境が立ち上がります。
 
 
-# 1. Dockerコンテナをビルドして起動
+### 1. Dockerコンテナをビルドして起動
 docker compose up -d --build
 
-# 2. Laravelコンテナに入る
+### 2. Laravelコンテナに入る
 docker compose exec php bash
 
-# 3. Composerで依存パッケージをインストール（初回のみ）
+### 3. Composerで依存パッケージをインストール（初回のみ）
 composer install
 
-# 4. .envを用意し、アプリキーを生成
+### 4. .envを用意し、アプリキーを生成
 cp .env.example .env
 php artisan key:generate
 
-# 5. マイグレーションとシーディング（初期データ登録）
+### 5. マイグレーションとシーディング（初期データ登録）
 php artisan migrate --seed
 
 ## 使用技術（実行環境）
