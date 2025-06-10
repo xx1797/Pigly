@@ -1,5 +1,7 @@
-# PiGLy（体重管理アプリ
-##  環境構築手順（Docker）
+# PiGLy（体重管理アプリ）
+
+## 環境構築
+
 以下のコマンドを順に実行することで、ローカル開発環境が立ち上がります。
 
 ```bash
@@ -51,3 +53,5 @@ phpMyAdmin: http://localhost:8080
 test@example.com	Test1234
 
 ※ /register/step1 から自分で会員登録も可能です。
+
+
