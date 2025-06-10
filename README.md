@@ -52,6 +52,6 @@ phpMyAdmin: http://localhost:8080
 
 ## テストユーザー情報（初期データ）
 メールアドレス	パスワード
-test@example.com	Test1234
+'ryuuto0127@softbank.ne.jp','pas'
 
 ※ /register/step1 から自分で会員登録も可能です。
